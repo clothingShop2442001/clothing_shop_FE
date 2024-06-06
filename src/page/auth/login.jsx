@@ -3,14 +3,19 @@ import Header from "../../component/header";
 import logo from "../../img/logo.png";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
+import Footer from "../../component/footer";
 
 import {
   AudioOutlined,
+  AimOutlined,
   UserOutlined,
   ShoppingCartOutlined,
   LockOutlined,
   MailOutlined,
   PhoneOutlined,
+  FacebookOutlined,
+  InstagramOutlined,
+  YoutubeOutlined,
 } from "@ant-design/icons";
 import { Input, Form } from "antd";
 const { Search } = Input;
@@ -34,70 +39,8 @@ export default function Login() {
   return (
     <>
       {/* header */}
-      <div className="bg-[#F1F1F1] h-[100px] flex items-center  ">
-        {/* logo */}
-        <div>
-          <img className="w-24  h-24 bg-[#F1F1F1] ml-5" src={logo} alt="" />
-        </div>
-        {/* menu  */}
-        <div className="mx-auto flex gap-6">
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            SHOP
-          </a>
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            BEST SELLER
-          </a>{" "}
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            COLLAB'S
-          </a>{" "}
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            NEW
-          </a>{" "}
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            CONTACT
-          </a>
-          <a
-            className=" font-serif text-[16px] font-bold text-[#3D4246]"
-            href="#"
-          >
-            ABOUT
-          </a>
-        </div>
-        {/* login  */}
-        <div className="flex gap-5 mr-4 bg-[F1F1F1]">
-          <Space direction="vertical">
-            <div className=" bg-[F1F1F1]"></div>
-            <Search
-              placeholder="Tìm kiếm"
-              onSearch={onSearch}
-              style={{
-                width: 150,
-              }}
-            />{" "}
-          </Space>
-          <a className="text-[30px]" href="#">
-            {" "}
-            <UserOutlined />{" "}
-          </a>
-          <a className="text-[30px]" href="">
-            <ShoppingCartOutlined />
-          </a>
-        </div>
+      <div>
+        <Header />
       </div>
       {/* login and register  */}
       <div className="flex w-[50%] gap-8 mt-14 ml-[300px]">
@@ -154,7 +97,7 @@ export default function Login() {
             <button className="font-semibold w-[500px] border-black border-solid border-[1px]	bg-white hover:bg-black hover:text-white  h-10">
               Đăng nhập{" "}
             </button>
-            <a className="text-sm font-semibold mt-5 underline" href="">
+            <a className="text-[16px] font-semibold mt-5 underline" href="">
               Quên mật khẩu?
             </a>
           </div>
@@ -261,6 +204,10 @@ export default function Login() {
             0933 800 190
           </span>
         </p>
+      </div>
+      {/* footer  */}
+      <div>
+        <Footer />
       </div>
     </>
   );
