@@ -3,6 +3,7 @@ import Header from "../../component/header";
 import bglistproduct from "../../img/background_listproduct.jpg";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
+
 import GamTshirt from "../../img/GamTshirt.jpg";
 import Tshirt01 from "../../img/Tshirt01.jpg";
 import Tshirt02 from "../../img/Tshirt02.jpg";
@@ -11,6 +12,9 @@ import Tshirt04 from "../../img/Tshirt04.jpg";
 import Tshirt05 from "../../img/Tshirt05.jpg";
 import Tshirt06 from "../../img/Tshirt06.jpg";
 import Tshirt07 from "../../img/Tshirt07.jpg";
+
+import { useEffect, useState } from "react";
+
 import { Pagination } from "antd";
 import Footer from "../../component/footer";
 
@@ -140,6 +144,9 @@ export default function ListProduct() {
                 </p>
               </a>
               <p className="text-sm text-center  text-black">390.000₫</p>
+              <button className="w-[150px] ml-10 mt-2 text-sm bg-gray-300 rounded-md item- py-1 tex-[#182C42]">
+                Thêm vào giỏ hàng
+              </button>
             </div>
           </div>
           <div className="w-[23%] h-[350px] flex flex-col ">

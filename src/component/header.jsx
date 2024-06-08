@@ -80,9 +80,14 @@ export default function Header() {
             {" "}
             <UserOutlined />{" "}
           </a>
-          <a className="text-[30px]" href="">
-            <ShoppingCartOutlined />
-          </a>
+          <div className="relative">
+            <a className="text-[33px]" href="">
+              <ShoppingCartOutlined />
+            </a>
+            <span className="absolute text-[12px] font-bold top-[13px] right-[10px] text-red-500">
+              0
+            </span>
+          </div>
         </div>
       </div>
     </>
