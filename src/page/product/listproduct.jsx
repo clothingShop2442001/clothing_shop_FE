@@ -3,15 +3,16 @@ import Header from "../../component/header";
 import bglistproduct from "../../img/background_listproduct.jpg";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
-
+import { products } from "../../products";
+import ProductCart from "../../component/productCart";
 import GamTshirt from "../../img/GamTshirt.jpg";
 import Tshirt01 from "../../img/Tshirt01.jpg";
-import Tshirt02 from "../../img/Tshirt02.jpg";
-import Tshirt03 from "../../img/Tshirt03.jpg";
-import Tshirt04 from "../../img/Tshirt04.jpg";
-import Tshirt05 from "../../img/Tshirt05.jpg";
-import Tshirt06 from "../../img/Tshirt06.jpg";
-import Tshirt07 from "../../img/Tshirt07.jpg";
+import Tshirt02 from "../../img/Tshirt01.jpg";
+import Tshirt03 from "../../img/Tshirt01.jpg";
+import Tshirt04 from "../../img/Tshirt01.jpg";
+import Tshirt05 from "../../img/Tshirt01.jpg";
+import Tshirt06 from "../../img/Tshirt01.jpg";
+import Tshirt07 from "../../img/Tshirt01.jpg";
 
 import { useEffect, useState } from "react";
 
@@ -131,8 +132,9 @@ export default function ListProduct() {
           </Dropdown>
         </div>
         <hr className="mt-3 border-[1px] border-black" />
-        {/* product  */}
-        <div className="w-full flex-wrap gap-7 mt-3 flex justify-start ">
+
+        {/* list product  */}
+        {/* <div className="w-full flex-wrap gap-7 mt-3 flex justify-start ">
           <div className="w-[23%] h-[350px] flex flex-col ">
             <a href="">
               <img className="w-full h-[200px]" src={GamTshirt} alt="" />
@@ -239,6 +241,14 @@ export default function ListProduct() {
               </a>
               <p className="text-sm text-center  text-black">390.000₫</p>
             </div>
+          </div>
+        </div> */}
+        {/* list product test  */}
+        <div>
+          <div className="w-full flex-wrap gap-5 mt-3 flex justify-start">
+            {products.map((product, key) => (
+              <ProductCart key={key} data={product} />
+            ))}
           </div>
         </div>
         <hr className="mt-3 border-[1px] border-gray " />

@@ -1,26 +1,24 @@
-import React from "react";
-import {
-  AudioOutlined,
-  AimOutlined,
-  UserOutlined,
-  ShoppingCartOutlined,
-  LockOutlined,
-  MailOutlined,
-  PhoneOutlined,
-  FacebookOutlined,
-  InstagramOutlined,
-  YoutubeOutlined,
-} from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Input, Form } from "antd";
 import logo from "../img/logo.png";
 import { Dropdown, Space } from "antd";
+import { useSelector } from "react-redux";
+
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 const { Search } = Input;
 export default function Header() {
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const carts = useSelector((store) => store.cart.items);
+  useEffect(() => {
+    let total = 0;
+    carts.forEach((item) => (total += item.quantity));
+    setTotalQuantity(total);
+  }, [carts]);
   return (
     <>
-      <div className="bg-[#F1F1F1] h-[100px] flex items-center  ">
+      <div className="bg-[#F1F1F1] h-[100px] flex items-center  fixed top-0 left-0 right-0  z-50 shadow-md  ">
         {/* logo */}
         <div>
           <img className="w-24  h-24 bg-[#F1F1F1] ml-5" src={logo} alt="" />
@@ -84,8 +82,11 @@ export default function Header() {
             <a className="text-[33px]" href="">
               <ShoppingCartOutlined />
             </a>
-            <span className="absolute text-[12px] font-bold top-[13px] right-[10px] text-red-500">
-              0
+            <span
+              className="absolute top-[75%] right-1/2 bg-red-500 text-white text-sm
+            w-5 h-5 rounded-full flex justify-center items-center"
+            >
+              {totalQuantity}
             </span>
           </div>
         </div>
