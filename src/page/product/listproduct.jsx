@@ -5,19 +5,12 @@ import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { products } from "../../products";
 import ProductCart from "../../component/productCart";
-import GamTshirt from "../../img/GamTshirt.jpg";
-import Tshirt01 from "../../img/Tshirt01.jpg";
-import Tshirt02 from "../../img/Tshirt01.jpg";
-import Tshirt03 from "../../img/Tshirt01.jpg";
-import Tshirt04 from "../../img/Tshirt01.jpg";
-import Tshirt05 from "../../img/Tshirt01.jpg";
-import Tshirt06 from "../../img/Tshirt01.jpg";
-import Tshirt07 from "../../img/Tshirt01.jpg";
 
 import { useEffect, useState } from "react";
 
 import { Pagination } from "antd";
 import Footer from "../../component/footer";
+import CartTab from "../../component/cartTab";
 
 const items = [
   {
@@ -257,6 +250,10 @@ export default function ListProduct() {
           defaultCurrent={1}
           total={50}
         />
+      </div>
+      {/* view cart  */}
+      <div>
+        <CartTab />
       </div>
       <div className="mt-20">
         <Footer />

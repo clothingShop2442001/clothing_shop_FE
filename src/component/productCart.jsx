@@ -9,7 +9,7 @@ export default function ProductCart(props) {
   const handleAddToCart = () => {
     dispatch(
       addToCart({
-        productID: id,
+        productId: id,
         quantity: 1,
       })
     );

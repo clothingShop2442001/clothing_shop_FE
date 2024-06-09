@@ -1,24 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  items: [],
+  items: localStorage.getItem("carts")
+    ? JSON.parse(localStorage.getItem("carts"))
+    : [],
+  statusTab: false,
 };
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart(state, action) {
-      const { productID, quantity } = action.payload;
-      const indexProducId = state.items.findIndex(
-        (item) => item.productID === productID
+      const { productId, quantity } = action.payload;
+      const indexProductId = state.items.findIndex(
+        (item) => item.productId === productId
       );
-      if (indexProducId >= 0) {
-        state.items[indexProducId].quantity += quantity;
+      if (indexProductId >= 0) {
+        state.items[indexProductId].quantity += quantity;
       } else {
-        state.items.push({ productID, quantity });
+        state.items.push({ productId, quantity });
+      }
+      localStorage.setItem("carts", JSON.stringify(state.items));
+    },
+    changeQuantity(state, action) {
+      const { productId, quantity } = action.payload;
+      const indexProductId = state.items.findIndex(
+        (item) => item.productId === productId
+      );
+      if (quantity > 0) {
+        state.items[indexProductId].quantity = quantity;
+      } else {
+        state.items = state.items.filter(
+          (item) => item.productId !== productId
+        );
+      }
+      localStorage.setItem("carts", JSON.stringify(state.items));
+    },
+    toggleStatusTab(state) {
+      if (state.statusTab === false) {
+        state.statusTab = true;
+      } else {
+        state.statusTab = false;
       }
     },
   },
 });
-export const { addToCart } = cartSlice.actions;
-
+export const { addToCart, changeQuantity, toggleStatusTab } = cartSlice.actions;
 export default cartSlice.reducer;

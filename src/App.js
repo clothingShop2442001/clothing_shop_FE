@@ -7,6 +7,7 @@ import ManageOder from "./page/admin/manageoder";
 import ManageProduct from "./page/admin/manageproduct";
 import ManageUser from "./page/admin/manageuser";
 import { Routes, Route } from "react-router-dom";
+import Detail from "./page/product/detail";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/manageoder" element={<ManageOder />} />
       <Route path="/manageproduct" element={<ManageProduct />} />
       <Route path="/manageuser" element={<ManageUser />} />
+      <Route path="/:slug" element={<Detail />} />
     </Routes>
   );
 }
