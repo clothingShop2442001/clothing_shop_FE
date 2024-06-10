@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Input, Form } from "antd";
 import logo from "../img/logo.png";
+import shoppingcart from "../img/shoppingcart.jpg";
 import { Dropdown, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleStatusTab } from "../store/cart";
@@ -79,17 +80,19 @@ export default function Header() {
               }}
             />{" "}
           </Space>
-          <a className="text-[30px]" href="#">
+          <a className="text-[30px]" href="/account">
             {" "}
             <UserOutlined />{" "}
           </a>
           <div onClick={handleOpenTabCart} className="relative">
-            <a className="text-[33px]" href="">
-              <ShoppingCartOutlined />
-            </a>
+            <img
+              className="w-8 h-8 mt-2 cursor-pointer "
+              src={shoppingcart}
+              alt=""
+            />
 
             <span
-              className="absolute top-[75%] right-1/2 bg-red-500 text-white text-sm
+              className="absolute top-[70%] right-1/2 bg-red-500 text-white text-sm
             w-5 h-5 rounded-full flex justify-center items-center"
             >
               {totalQuantity}

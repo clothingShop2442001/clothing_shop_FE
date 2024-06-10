@@ -39,12 +39,12 @@ const Detail = () => {
       </div>
 
       <div>
-        <div className="grid grid-cols-2 mt-32 gap-5 mt-5">
+        <div className="grid grid-cols-2 mt-32 gap-5">
           <div>
             <img src={detail.image} alt="" className="w-full" />
           </div>
           <div className="flex flex-col gap-5">
-            <h1 className="text-4xl uppercase font-bold">{detail.name}</h1>
+            <h1 className="text-3xl uppercase font-bold">{detail.name}</h1>
             <p className="font-bold text-2xl">${detail.price}</p>
             <div className="flex gap-5">
               <div className="flex gap-2 justify-center items-center">
@@ -71,7 +71,9 @@ const Detail = () => {
                 Add To Cart
               </button>
             </div>
-            <p>{detail.description}</p>
+            <div className="text-sm">
+              <p>{detail.description}</p>
+            </div>
           </div>
         </div>
       </div>
