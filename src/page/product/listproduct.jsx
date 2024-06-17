@@ -11,26 +11,33 @@ import { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import Footer from "../../component/footer";
 import CartTab from "../../component/cartTab";
+import axios from "axios";
 
-const items = [
-  {
-    label: <a href="https://www.antgroup.com">1st menu item</a>,
-    key: "0",
-  },
-  {
-    label: <a href="https://www.aliyun.com">2nd menu item</a>,
-    key: "1",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "3rd menu item",
-    key: "3",
-  },
-];
+// const items = [
+//   {
+//     label: <a href="https://www.antgroup.com">1st menu item</a>,
+//     key: "0",
+//   },
+//   {
+//     label: <a href="https://www.aliyun.com">2nd menu item</a>,
+//     key: "1",
+//   },
+//   {
+//     type: "divider",
+//   },
+//   {
+//     label: "3rd menu item",
+//     key: "3",
+//   },
+// ];
 
 export default function ListProduct() {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3001/products/products").then(({ data }) => {
+      setItems(data.data);
+    });
+  }, []);
   return (
     <>
       <div>
@@ -126,120 +133,9 @@ export default function ListProduct() {
         </div>
         <hr className="mt-3 border-[1px] border-black" />
 
-        {/* list product  */}
-        {/* <div className="w-full flex-wrap gap-7 mt-3 flex justify-start ">
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={GamTshirt} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-              <button className="w-[150px] ml-10 mt-2 text-sm bg-gray-300 rounded-md item- py-1 tex-[#182C42]">
-                Thêm vào giỏ hàng
-              </button>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt01} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt02} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt03} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt04} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt05} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt06} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-          <div className="w-[23%] h-[350px] flex flex-col ">
-            <a href="">
-              <img className="w-full h-[200px]" src={Tshirt07} alt="" />
-            </a>
-            <div className="mt-10">
-              <a href="">
-                <p className=" text-sm text-center tex-[#182C42]">
-                  DC X GAM GAMTIME T-SHIRT
-                </p>
-              </a>
-              <p className="text-sm text-center  text-black">390.000₫</p>
-            </div>
-          </div>
-        </div> */}
-        {/* list product test  */}
         <div>
           <div className="w-full flex-wrap gap-5 mt-3 flex justify-start">
-            {products.map((product, key) => (
+            {items.map((product, key) => (
               <ProductCart key={key} data={product} />
             ))}
           </div>

@@ -1,28 +1,26 @@
 import React from "react";
 import HeaderAdmin from "../../component/headerAdmin";
 import SideBar from "../../component/sidebarAdmin";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import { Table } from "antd";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 const columns = [
   {
     title: "ID Đơn hàng",
-    dataIndex: "idOrder",
+    dataIndex: "_id",
     key: "idUser",
-    render: (text) => <a>{text}</a>,
   },
   {
-    title: "ID khách hàng",
-    dataIndex: "IdUserName",
+    title: "Tên người dùng",
+    dataIndex: "userName",
     key: "IdUserName",
   },
+
   {
-    title: "Nhân viên",
-    dataIndex: "staff",
-    key: "staff",
-  },
-  {
-    title: "Ngày đặt hàng",
-    dataIndex: "OrderDate",
+    title: "Địa chỉ giao hàng",
+    dataIndex: "address",
     key: "OrderDate",
   },
   {
@@ -30,51 +28,33 @@ const columns = [
     dataIndex: "totalPrice",
     key: "totalPrice",
   },
+
   {
-    title: "Địa chỉ giao hàng",
-    dataIndex: "addressShipping",
-    key: "addressShipping",
+    title: "Thao tác",
+    key: "actions",
+    render: (text, record) => (
+      <Button type="link" danger>
+        Xóa
+      </Button>
+    ),
   },
 ];
-const data = [
-  {
-    key: "1",
-    idOrder: "#45162",
-    IdUserName: "45162",
-    staff: "Trần Nhật Hoàng",
-    OrderDate: "24/7/2001",
-    totalPrice: "3000000",
-    addressShipping: "Quế Châu, Quế Sơn",
-  },
-  {
-    key: "1",
-    idOrder: "#45162",
-    IdUserName: "45162",
-    staff: "Trần Nhật Hoàng",
-    OrderDate: "24/7/2001",
-    totalPrice: "3000000",
-    addressShipping: "Quế Châu, Quế Sơn",
-  },
-  {
-    key: "1",
-    idOrder: "#45162",
-    IdUserName: "45162",
-    staff: "Trần Nhật Hoàng",
-    OrderDate: "24/7/2001",
-    totalPrice: "3000000",
-    addressShipping: "Quế Châu, Quế Sơn",
-  },
-  {
-    key: "1",
-    idOrder: "#45162",
-    IdUserName: "45162",
-    staff: "Trần Nhật Hoàng",
-    OrderDate: "24/7/2001",
-    totalPrice: "3000000",
-    addressShipping: "Quế Châu, Quế Sơn",
-  },
-];
+
 export default function ManageOder() {
+  const [orders, setOrders] = useState([]);
+
+  const fetchOrders = () => {
+    axios
+      .get("http://localhost:3001/users/users")
+      .then(({ data }) => setOrders(data.data))
+      .catch((error) =>
+        console.error("Lỗi khi lấy danh sách sản phẩm:", error)
+      );
+  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   return (
     <>
       {/* header admin  */}
@@ -128,7 +108,7 @@ export default function ManageOder() {
             </div>
             {/* table  */}
             <div className="mt-3">
-              <Table className="mt-1" columns={columns} dataSource={data} />
+              <Table className="mt-1" columns={columns} dataSource={orders} />
             </div>
           </div>
         </div>

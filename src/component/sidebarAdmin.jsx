@@ -9,7 +9,7 @@ import {
 export default function SideBar() {
   return (
     <>
-      <div className="flex flex-col h-[610px] max-h-[610px] py-4  bg-gray-300 border-[1px] border-black">
+      <div className="flex flex-col h-screen max-h-[610px] py-4  bg-gray-300 border-[1px] border-black">
         <div className="ml-4">
           <UserOutlined />
           <a className="ml-4" href="/manageuser">

@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderAdmin from "../../component/headerAdmin";
 import SideBar from "../../component/sidebarAdmin";
 import { Input } from "antd";
 import { Table } from "antd";
+import axios from "axios";
 
 const columns = [
   {
     title: "ID người dùng",
-    dataIndex: "idUser",
+    dataIndex: "_id",
     key: "idUser",
-    render: (text) => <a>{text}</a>,
   },
   {
     title: "Tên đăng nhập",
-    dataIndex: "userName",
+    dataIndex: "useraaName",
     key: "userName",
   },
   {
@@ -38,74 +38,25 @@ const columns = [
   },
   {
     title: "Ngày tạo",
-    dataIndex: "creatDay",
+    dataIndex: "createdAt",
     key: "creatDay",
-  },
-];
-const data = [
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
-  },
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
-  },
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
-  },
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
-  },
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
-  },
-  {
-    key: "1",
-    idUser: "#45162",
-    userName: "nhathoang244",
-    address: "Đà Nẵng, Vietnam	",
-    fullname: "Trần Nhật Hoàng",
-    phoneNumber: "0987487401",
-    email: "nhathoang2442001@gmail.com",
-    creatDay: "24/4/2001",
   },
 ];
 
 export default function ManageUser() {
+  const [users, setUsers] = useState([]);
+
+  const fetchUser = () => {
+    axios
+      .get("http://localhost:3001/users/users")
+      .then(({ data }) => setUsers(data.data))
+      .catch((error) =>
+        console.error("Lỗi khi lấy danh sách sản phẩm:", error)
+      );
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <>
       <div>
@@ -158,7 +109,7 @@ export default function ManageUser() {
             </div>
             {/* table  */}
             <div className="mt-3">
-              <Table className="mt-1" columns={columns} dataSource={data} />
+              <Table className="mt-1" columns={columns} dataSource={users} />
             </div>
           </div>
         </div>

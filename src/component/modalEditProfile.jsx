@@ -10,15 +10,13 @@ export default function ModalEditProfile() {
   return (
     <>
       <Form
-        name="basic"
+        className="h-[350px] max-w-[600px] "
+        layout="Vertical"
         labelCol={{
           span: 8,
         }}
         wrapperCol={{
           span: 16,
-        }}
-        style={{
-          maxWidth: 600,
         }}
         initialValues={{
           remember: true,
@@ -37,7 +35,7 @@ export default function ModalEditProfile() {
             },
           ]}
         >
-          <Input />
+          <Input className="" />
         </Form.Item>{" "}
         <Form.Item
           label="Địa chỉ"
@@ -87,13 +85,14 @@ export default function ModalEditProfile() {
         >
           <Input />
         </Form.Item>
-        <Button
+        <button
+          onClick={onFinish}
           type="primary"
           htmlType="submit"
-          className="w-[150px] mr-[90px] rounded-md absolute -bottom-4 -right-16 bg-black text-white font-bold py-3 px-4 rounded opacity-100 hover:opacity-80 transition-opacity mt-3"
+          className="w-[100px] mr-[90px] mb-8 rounded-md absolute -bottom-4 -right-16 bg-black text-white font-bold py-2 px-4  "
         >
-          Tạo bài học
-        </Button>
+          Cập nhập
+        </button>
       </Form>
     </>
   );

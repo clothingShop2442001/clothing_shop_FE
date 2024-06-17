@@ -4,6 +4,7 @@ import { products } from "../../products";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cart";
 import Header from "../../component/header";
+import CartTab from "../../component/cartTab";
 
 const Detail = () => {
   const { slug } = useParams();
@@ -75,6 +76,9 @@ const Detail = () => {
               <p>{detail.description}</p>
             </div>
           </div>
+        </div>
+        <div>
+          <CartTab />
         </div>
       </div>
     </>

@@ -32,7 +32,7 @@ export default function CartItem(props) {
   return (
     <>
       <div className="flex shadow-xl justify-between items-center h-14  bg-white text-black p2 border-1 border-black rounded-sm     mb-4  border-slate-700 ">
-        <img className="w-12 h-10 ml-2 " src={detail.image} alt="" />
+        <img className="w-12 h-10 ml-2 " src={detail.image} alt="" />/
         <h2 className="">{detail.name}</h2>
         <p>${detail.price * quantity}</p>
         <div className="w-20 flex justify-between">

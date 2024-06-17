@@ -15,6 +15,18 @@ import React from "react";
 export default function Footer() {
   return (
     <>
+      <div className="bg-[#F1F1F1] h-[70px] mt-40   flex items-center gap-3 ">
+        <div className="text-[20px] ml-5">
+          {" "}
+          <PhoneOutlined />
+        </div>
+        <p className="text-[14px]">
+          Hỗ trợ / Mua hàng:{" "}
+          <span className="text-[14px] text-red-600 font-bold">
+            0933 800 190
+          </span>
+        </p>
+      </div>
       <div className="flex  mt-5 font-sans ml-3">
         {/* brand  */}
         <div className="flex  flex-col">

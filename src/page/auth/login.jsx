@@ -43,7 +43,7 @@ export default function Login() {
         <Header />
       </div>
       {/* login and register  */}
-      <div className="flex w-[50%] gap-8 mt-14 ml-[300px]">
+      <div className="flex w-[80%] gap-8 mt-40 mx-auto">
         {/* login  */}
 
         <Form
@@ -193,18 +193,7 @@ export default function Login() {
         </Form>
       </div>
       {/* hỗ trợ và mua hàng  */}
-      <div className="bg-[#F1F1F1] h-[70px] mt-40   flex items-center gap-3 ">
-        <div className="text-[20px] ml-5">
-          {" "}
-          <PhoneOutlined />
-        </div>
-        <p className="text-[14px]">
-          Hỗ trợ / Mua hàng:{" "}
-          <span className="text-[14px] text-red-600 font-bold">
-            0933 800 190
-          </span>
-        </p>
-      </div>
+
       {/* footer  */}
       <div>
         <Footer />

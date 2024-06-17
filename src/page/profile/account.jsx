@@ -76,7 +76,6 @@ const data = [
 ];
 
 export default function Account() {
-  // handle modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -93,7 +92,7 @@ export default function Account() {
         <Header />
       </div>
       {/* history order and my account  */}
-      <div className="flex mx-auto w-[80%] mt-10">
+      <div className="flex   mx-auto w-[80%] mt-36">
         {/* history order  */}
         <div className="flex flex-col">
           <h1 className="font-serif font-bold text-[18px]">
@@ -105,7 +104,10 @@ export default function Account() {
           <p className="text-[#484871] font-semibold mt-5 text-[14px]">
             Đơn hàng gần nhất
           </p>
-          <Table className="mt-1" columns={columns} dataSource={data} />
+          <div>
+            {" "}
+            <Table className="mt-1" columns={columns} dataSource={data} />
+          </div>
         </div>
         {/* my account  */}
         <div className="flex flex-col ml-6">
@@ -129,7 +131,7 @@ export default function Account() {
           <button
             type="primary"
             onClick={showModal}
-            className="py-1  text-gray-500 font-semibold mt-4 text-[14px] w-[100px] border-2 border-black"
+            className="py-1  text-gray-500 rounded-md font-semibold mt-4 text-[14px] w-[100px] border-2 border-black"
           >
             Sửa địa chỉ
           </button>
@@ -147,14 +149,14 @@ export default function Account() {
             <ModalEditProfile />
             <button
               onClick={handleCancel}
-              className="w-[70px] rounded-xl mr-6 mt-4 bg-orange-400 justify-end"
+              className="w-[100px] mr-[200px] mb-8 border-2 border-black rounded-md absolute -bottom-5 -right-16 border-2 bg-white text-black font-bold py-2 px-4    "
             >
-              Cancle
+              Hủy bỏ
             </button>
           </Modal>
         </div>
       </div>
-      <div className="mt-[10px]">
+      <div className="mt-36">
         <Footer />
       </div>
     </>
