@@ -121,6 +121,24 @@ export default function Login() {
             rules={[
               {
                 required: true,
+                message: "Vui lòng nhập tên tài khoản",
+              },
+            ]}
+          >
+            <Input
+              className="py-2"
+              prefix={
+                <UserOutlined className="site-form-item-icon text-[16px]" />
+              }
+              placeholder="Tên tài khoản"
+            />
+          </Form.Item>
+          <Form.Item
+            className="w-[500px] mt-5"
+            name="fullname"
+            rules={[
+              {
+                required: true,
                 message: "Vui lòng nhập họ và tên",
               },
             ]}
@@ -185,6 +203,24 @@ export default function Login() {
                 <LockOutlined className="site-form-item-icon text-[16px]" />
               }
               placeholder="Mật khẩu"
+            />
+          </Form.Item>
+          <Form.Item
+            className="w-[500px] mt-5"
+            name="confirmpassword"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập mật khẩu",
+              },
+            ]}
+          >
+            <Input
+              className="py-2"
+              prefix={
+                <LockOutlined className="site-form-item-icon text-[16px]" />
+              }
+              placeholder="Mật khẩu xác nhận"
             />
           </Form.Item>
           <button className="font-semibold w-[500px] border-black border-solid border-[1px]	bg-white hover:bg-black hover:text-white  h-10">

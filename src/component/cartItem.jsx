@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { products } from "../products";
 import { useDispatch } from "react-redux";
 import { changeQuantity } from "../store/cart";
+import axios from "axios";
 
 export default function CartItem(props) {
   const { productId, quantity } = props.data;
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState({});
   const dispatch = useDispatch();
+  const [items, setItems] = useState([]);
   useEffect(() => {
-    const findDetail = products.filter(
-      (product) => product.id === productId
-    )[0];
+    axios.get("http://localhost:3001/products/products").then(({ data }) => {
+      setItems(data.data);
+    });
+  }, []);
+  useEffect(() => {
+    const findDetail = items.find((product) => product._id === productId) || {};
     setDetail(findDetail);
-  }, [productId]);
+  }, [items, productId]);
   const handleMinusQuantity = () => {
     dispatch(
       changeQuantity({
@@ -29,6 +33,7 @@ export default function CartItem(props) {
       })
     );
   };
+  console.log(detail);
   return (
     <>
       <div className="flex shadow-xl justify-between items-center h-14  bg-white text-black p2 border-1 border-black rounded-sm     mb-4  border-slate-700 ">

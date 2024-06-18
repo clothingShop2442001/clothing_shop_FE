@@ -4,17 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../store/cart";
 export default function ProductCart(props) {
   const carts = useSelector((store) => store.cart.items);
-  const { id, name, price, image, slug } = props.data;
+  const { _id, name, price, image, slug } = props.data;
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(
       addToCart({
-        productId: id,
+        productId: _id,
         quantity: 1,
       })
     );
   };
-  console.log(carts);
+  console.log(carts, props.data);
   return (
     <>
       <div className="w-[23%] h-[350px] rounded-sm shadow-xl flex flex-col">
