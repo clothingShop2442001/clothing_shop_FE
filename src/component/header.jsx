@@ -6,6 +6,7 @@ import shoppingcart from "../img/shoppingcart.jpg";
 import { Dropdown, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleStatusTab } from "../store/cart";
+import { useNavigate } from "react-router-dom";
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
@@ -21,6 +22,12 @@ export default function Header() {
   }, [carts]);
   const handleOpenTabCart = () => {
     dispatch(toggleStatusTab());
+  };
+
+  // handle navigate login
+  const navigate = useNavigate();
+  const handleNavigateLogin = () => {
+    navigate("/login");
   };
   return (
     <>
@@ -80,9 +87,9 @@ export default function Header() {
               }}
             />{" "}
           </Space>
-          <a className="text-[30px]" href="/account">
+          <a className="text-[30px]">
             {" "}
-            <UserOutlined />{" "}
+            <UserOutlined onClick={handleNavigateLogin} />{" "}
           </a>
           <div onClick={handleOpenTabCart} className="relative">
             <img

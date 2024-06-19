@@ -1,46 +1,49 @@
 import React from "react";
 import HeaderAdmin from "../../component/headerAdmin";
 import SideBar from "../../component/sidebarAdmin";
-import { Button, Input } from "antd";
+import { Button, Input, Modal, message } from "antd";
 import { Table } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const columns = [
-  {
-    title: "ID Đơn hàng",
-    dataIndex: "_id",
-    key: "idUser",
-  },
-  {
-    title: "Tên người dùng",
-    dataIndex: "userName",
-    key: "IdUserName",
-  },
-
-  {
-    title: "Địa chỉ giao hàng",
-    dataIndex: "address",
-    key: "OrderDate",
-  },
-  {
-    title: "Tổng giá trị",
-    dataIndex: "totalPrice",
-    key: "totalPrice",
-  },
-
-  {
-    title: "Thao tác",
-    key: "actions",
-    render: (text, record) => (
-      <Button type="link" danger>
-        Xóa
-      </Button>
-    ),
-  },
-];
-
 export default function ManageOder() {
+  const columns = [
+    {
+      title: "ID Đơn hàng",
+      dataIndex: "_id",
+      key: "idUser",
+    },
+    {
+      title: "Tên người dùng",
+      dataIndex: "userName",
+      key: "IdUserName",
+    },
+
+    {
+      title: "Địa chỉ giao hàng",
+      dataIndex: "address",
+      key: "OrderDate",
+    },
+    {
+      title: "Tổng giá trị",
+      dataIndex: "totalPrice",
+      key: "totalPrice",
+    },
+
+    {
+      title: "Thao tác",
+      key: "action",
+      render: (text, record) => (
+        <Button
+          type="link"
+          danger
+          onClick={() => handleDeleteOrder(record._id)}
+        >
+          Xóa
+        </Button>
+      ),
+    },
+  ];
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = () => {
@@ -54,6 +57,24 @@ export default function ManageOder() {
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  const handleDeleteOrder = (orderID) => {
+    Modal.confirm({
+      title: "Bạn có muốn xóa đơn hàng này",
+      centered: true,
+      onOk: () => {
+        axios
+          .delete(`http://localhost:3001/orders/${orderID}`)
+          .then((response) => {
+            message.success("xóa đơn hàng thành công");
+            fetchOrders();
+          })
+          .catch((erro) => {
+            message.error("Xóa người dùng thất bại!");
+          });
+      },
+    });
+  };
 
   return (
     <>

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../component/header";
 import logo from "../../img/logo.png";
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { Dropdown, Space, message } from "antd";
 import Footer from "../../component/footer";
-
+import { useNavigate } from "react-router-dom";
 import {
   AudioOutlined,
   AimOutlined,
@@ -18,6 +18,7 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import { Input, Form } from "antd";
+import axios from "axios";
 const { Search } = Input;
 
 const suffix = (
@@ -28,14 +29,52 @@ const suffix = (
     }}
   />
 );
-const onSearch = (value, _e, info) => console.log(info?.source, value);
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-export default function Login() {
+
+function Login() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      if (parsedUser.role === "Admin") {
+        navigate("/manageuser");
+      } else if (parsedUser.role === "User") {
+        navigate("/listproduct");
+      }
+    }
+  }, [navigate]);
+
+  const handleLogin = (values) => {
+    axios
+      .post("http://localhost:3001/users/signin", values)
+      .then((response) => {
+        const { role, ...userData } = response.data.data;
+        // Save user data in local storage
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        if (role === "Admin") {
+          navigate("/manageuser");
+        } else if (role === "User") {
+          navigate("/listproduct");
+        }
+      })
+      .catch((error) => {
+        message.error("Bạn đã nhập sai email hoặc mật khẩu, vui lòng nhập lại");
+      });
+  };
+
+  const handleRegister = (values) => {
+    axios
+      .post("http://localhost:3001/users", values)
+      .then((response) => {
+        message.success("Đã tạo tài khoản thành công");
+      })
+      .catch((error) => {
+        message.error("Thêm người dùng thất bại");
+      });
+  };
+
   return (
     <>
       {/* header */}
@@ -45,15 +84,13 @@ export default function Login() {
       {/* login and register  */}
       <div className="flex w-[80%] gap-8 mt-40 mx-auto">
         {/* login  */}
-
         <Form
           className=" text-center"
           name="basic"
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleLogin}
           autoComplete="off"
         >
           <h1 className="font-semibold">ĐĂNG NHẬP</h1>
@@ -110,14 +147,13 @@ export default function Login() {
           initialValues={{
             remember: true,
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleRegister}
           autoComplete="off"
         >
           <h1 className="font-semibold">ĐĂNG KÝ THÀNH VIÊN MỚI</h1>
           <Form.Item
             className="w-[500px] mt-5"
-            name="username"
+            name="userName"
             rules={[
               {
                 required: true,
@@ -171,7 +207,7 @@ export default function Login() {
           </Form.Item>
           <Form.Item
             className="w-[500px] mt-5"
-            name="phone"
+            name="phoneNumber"
             rules={[
               {
                 required: true,
@@ -237,3 +273,5 @@ export default function Login() {
     </>
   );
 }
+
+export default Login;

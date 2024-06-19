@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import HeaderAdmin from "../../component/headerAdmin";
 import SideBar from "../../component/sidebarAdmin";
-import { Input } from "antd";
+import { Button, Input, Modal, message } from "antd";
 import { Table } from "antd";
 import axios from "axios";
 
-const columns = [
+const columns = (handleDeleteUser) => [
   {
     title: "ID người dùng",
     dataIndex: "_id",
@@ -13,7 +13,7 @@ const columns = [
   },
   {
     title: "Tên đăng nhập",
-    dataIndex: "useraaName",
+    dataIndex: "userName",
     key: "userName",
   },
   {
@@ -41,6 +41,15 @@ const columns = [
     dataIndex: "createdAt",
     key: "creatDay",
   },
+  {
+    title: "Thao tác",
+    key: "action",
+    render: (text, record) => (
+      <Button type="link" danger onClick={() => handleDeleteUser(record._id)}>
+        Xóa
+      </Button>
+    ),
+  },
 ];
 
 export default function ManageUser() {
@@ -51,12 +60,33 @@ export default function ManageUser() {
       .get("http://localhost:3001/users/users")
       .then(({ data }) => setUsers(data.data))
       .catch((error) =>
-        console.error("Lỗi khi lấy danh sách sản phẩm:", error)
+        console.error("Lỗi khi lấy danh sách người dùng:", error)
       );
   };
+
   useEffect(() => {
     fetchUser();
   }, []);
+
+  const handleDeleteUser = (userId) => {
+    Modal.confirm({
+      title: "Bạn có chắc chắn muốn xóa người dùng này?",
+      centered: true,
+      onOk: () => {
+        axios
+          .delete(`http://localhost:3001/users/${userId}`)
+          .then(() => {
+            message.success("Xóa người dùng thành công!");
+            fetchUser();
+          })
+          .catch((error) => {
+            console.error("Lỗi khi xóa người dùng:", error);
+            message.error("Xóa người dùng thất bại!");
+          });
+      },
+    });
+  };
+
   return (
     <>
       <div>
@@ -109,7 +139,11 @@ export default function ManageUser() {
             </div>
             {/* table  */}
             <div className="mt-3">
-              <Table className="mt-1" columns={columns} dataSource={users} />
+              <Table
+                className="mt-1"
+                columns={columns(handleDeleteUser)}
+                dataSource={users}
+              />
             </div>
           </div>
         </div>

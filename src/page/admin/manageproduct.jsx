@@ -98,12 +98,18 @@ export default function ManageProduct() {
   };
 
   const handleDeleteProduct = (productId) => {
-    axios
-      .delete(`http://localhost:3001/products/${productId}`)
-      .then((response) => {
-        message.success("Xóa sản phẩm thành công!");
-        fetchProducts();
-      });
+    Modal.confirm({
+      centered: true,
+      title: "Bạn có muốn xóa sản phẩm này",
+      onOk: () => {
+        axios
+          .delete(`http://localhost:3001/products/${productId}`)
+          .then((response) => {
+            message.success("Xóa sản phẩm thành công!");
+            fetchProducts();
+          });
+      },
+    });
   };
 
   const columns = [
