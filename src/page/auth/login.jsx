@@ -7,15 +7,11 @@ import Footer from "../../component/footer";
 import { useNavigate } from "react-router-dom";
 import {
   AudioOutlined,
-  AimOutlined,
   UserOutlined,
-  ShoppingCartOutlined,
   LockOutlined,
   MailOutlined,
   PhoneOutlined,
-  FacebookOutlined,
-  InstagramOutlined,
-  YoutubeOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { Input, Form } from "antd";
 import axios from "axios";
@@ -33,30 +29,38 @@ const suffix = (
 function Login() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      if (parsedUser.role === "Admin") {
-        navigate("/manageuser");
-      } else if (parsedUser.role === "User") {
-        navigate("/listproduct");
-      }
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const user = localStorage.getItem("user");
+  //   if (user) {
+  //     const parsedUser = JSON.parse(user);
+  //     if (parsedUser.role === "Admin") {
+  //       navigate("/manageuser");
+  //     } else if (parsedUser.role === "User") {
+  //       navigate("/account");
+  //     }
+  //   }
+  // }, [navigate]);
 
   const handleLogin = (values) => {
     axios
       .post("http://localhost:3001/users/signin", values)
       .then((response) => {
         const { role, ...userData } = response.data.data;
-        // Save user data in local storage
+        console.log("🚀 ~ .then ~ response.data.data:", response.data.data);
+
+        if (role === undefined) {
+          message.error(
+            "Bạn đã nhập sai email hoặc mật khẩu, vui lòng nhập lại"
+          );
+          return;
+        }
+
         localStorage.setItem("user", JSON.stringify(userData));
 
         if (role === "Admin") {
-          navigate("/manageuser");
+          navigate("/account");
         } else if (role === "User") {
-          navigate("/listproduct");
+          navigate("/account");
         }
       })
       .catch((error) => {
@@ -225,6 +229,24 @@ function Login() {
           </Form.Item>
           <Form.Item
             className="w-[500px] mt-5"
+            name="address"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập địa chỉ giao hàng",
+              },
+            ]}
+          >
+            <Input
+              className="py-2"
+              prefix={
+                <HomeOutlined className="site-form-item-icon text-[16px]" />
+              }
+              placeholder="địa chỉ giao hàng"
+            />
+          </Form.Item>
+          <Form.Item
+            className="w-[500px] mt-5"
             name="password"
             rules={[
               {
@@ -234,6 +256,7 @@ function Login() {
             ]}
           >
             <Input
+              type="password"
               className="py-2"
               prefix={
                 <LockOutlined className="site-form-item-icon text-[16px]" />
@@ -252,6 +275,7 @@ function Login() {
             ]}
           >
             <Input
+              type="password"
               className="py-2"
               prefix={
                 <LockOutlined className="site-form-item-icon text-[16px]" />

@@ -21,7 +21,7 @@ export default function ManageOder() {
 
     {
       title: "Địa chỉ giao hàng",
-      dataIndex: "address",
+      dataIndex: "addres",
       key: "OrderDate",
     },
     {
@@ -48,7 +48,7 @@ export default function ManageOder() {
 
   const fetchOrders = () => {
     axios
-      .get("http://localhost:3001/users/users")
+      .get("http://localhost:3001/orders/orders")
       .then(({ data }) => setOrders(data.data))
       .catch((error) =>
         console.error("Lỗi khi lấy danh sách sản phẩm:", error)
@@ -70,7 +70,7 @@ export default function ManageOder() {
             fetchOrders();
           })
           .catch((erro) => {
-            message.error("Xóa người dùng thất bại!");
+            message.error("Xóa đơn hàng thất bại!");
           });
       },
     });

@@ -27,7 +27,7 @@ export default function ModalEditProfile() {
       >
         <Form.Item
           label="Tên Tài khoản"
-          name="username"
+          name="userName"
           rules={[
             {
               required: true,
@@ -50,24 +50,12 @@ export default function ModalEditProfile() {
           <Input />
         </Form.Item>{" "}
         <Form.Item
-          label="Thành phố"
-          name="city"
+          label="Email"
+          name="email"
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập thành phố",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>{" "}
-        <Form.Item
-          label="Quốc Gia"
-          name="Nation"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập quốc gia",
+              message: "Vui lòng nhập email",
             },
           ]}
         >

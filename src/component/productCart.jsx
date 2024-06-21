@@ -10,6 +10,7 @@ export default function ProductCart(props) {
     dispatch(
       addToCart({
         productId: _id,
+        price: price,
         quantity: 1,
       })
     );

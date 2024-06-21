@@ -26,8 +26,13 @@ export default function Header() {
 
   // handle navigate login
   const navigate = useNavigate();
-  const handleNavigateLogin = () => {
-    navigate("/login");
+  const handleUserIconClick = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate("/account");
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <>
@@ -89,7 +94,7 @@ export default function Header() {
           </Space>
           <a className="text-[30px]">
             {" "}
-            <UserOutlined onClick={handleNavigateLogin} />{" "}
+            <UserOutlined onClick={handleUserIconClick} />{" "}
           </a>
           <div onClick={handleOpenTabCart} className="relative">
             <img
