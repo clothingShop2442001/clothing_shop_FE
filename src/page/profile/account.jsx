@@ -9,36 +9,25 @@ import axios, { Axios } from "axios";
 
 const columns = [
   {
-    title: "Đơn hàng #",
-    dataIndex: "order",
-    key: "order",
-    render: (text) => <a>{text}</a>,
+    title: "ID Đơn hàng",
+    dataIndex: "_id",
+    key: "idUser",
   },
   {
-    title: "Ngày",
-    dataIndex: "date",
-    key: "date",
+    title: "Tên người dùng",
+    dataIndex: "userName",
+    key: "IdUserName",
+  },
+
+  {
+    title: "Địa chỉ giao hàng",
+    dataIndex: "addres",
+    key: "OrderDate",
   },
   {
-    title: "Chuyển đến",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Giá trị đơn hàng",
-    dataIndex: "price",
-    key: "price",
-  },
-  {
-    title: "Tình trạng thanh toán",
-    dataIndex: "orderStatus",
-    key: "orderStatus",
-  },
-  {
-    title: "Xem chi tiết",
-    dataIndex: "Detail",
-    key: "Detail",
-    render: (text) => <a>{text}</a>,
+    title: "Tổng giá trị",
+    dataIndex: "totalPrice",
+    key: "totalPrice",
   },
 ];
 
@@ -75,14 +64,15 @@ const data = [
 export default function Account() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState();
-  const [editInfo, setEditInfo] = useState(); // New state for form data
+  const [editInfo, setEditInfo] = useState();
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUserInfo(JSON.parse(storedUser));
-      setEditInfo(JSON.parse(storedUser)); // Initialize editInfo with current user data
+      setEditInfo(JSON.parse(storedUser));
     }
   }, []);
 
@@ -106,6 +96,7 @@ export default function Account() {
       email: editInfo.email,
       phoneNumber: editInfo.phoneNumber,
     };
+
     console.log("🚀 ~ handleUpdateProfile ~ editInfo:", editInfo);
     axios
       .put(`http://localhost:3001/users/${editInfo.userId}`, payload)
@@ -116,6 +107,22 @@ export default function Account() {
     localStorage.setItem("user", JSON.stringify(editInfo));
     setUserInfo(editInfo);
     handleCancel();
+  };
+  const fetchOrders = () => {
+    axios
+      .get("http://localhost:3001/orders/orders")
+      .then(({ data }) => setOrders(data.data))
+      .catch((error) =>
+        console.error("Lỗi khi lấy danh sách sản phẩm:", error)
+      );
+  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+  const fetchOrderId = (orderID) => {
+    axios.get(`http://localhost:3001/orders/${orderID}`).then((response) => {
+      fetchOrders();
+    });
   };
 
   const handleFormChange = (changedValues) => {
@@ -145,7 +152,7 @@ export default function Account() {
             Đơn hàng gần nhất
           </p>
           <div>
-            <Table className="mt-1" columns={columns} dataSource={data} />
+            <Table className="mt-1" columns={columns} dataSource={orders} />
           </div>
         </div>
         {/* my account  */}
@@ -156,7 +163,7 @@ export default function Account() {
             <span className="font-bold text-black">{userInfo.fullName}</span>
           </p>
           <p className="text-gray-500 font-semibold mt-1 text-[14px]">
-            Địa chỉ: <span>{userInfo.address}</span>
+            Địa chỉ: <span>{userInfo.addres}</span>
           </p>
           <p className="text-gray-500 font-semibold mt-1 text-[14px]">
             Email: <span>{userInfo.email}</span>
@@ -181,6 +188,7 @@ export default function Account() {
           </div>
 
           <Modal
+            className="relative"
             width={400}
             footer={null}
             open={isModalOpen}
@@ -227,10 +235,10 @@ export default function Account() {
               >
                 <Input />
               </Form.Item>
-              <div className="flex justify-between">
+              <div className="flex  justify-end">
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white rounded-md font-semibold text-[14px] w-[100px] py-1"
+                  className="bg-blue-500 text-white rounded-md border-2   border-blue font-semibold text-[14px] w-[100px] py-1"
                 >
                   Cập nhật
                 </button>
@@ -238,7 +246,7 @@ export default function Account() {
             </Form>
             <button
               onClick={handleCancel}
-              className="w-[100px] border-2 border-black rounded-md bg-white text-black font-bold py-1"
+              className="w-[100px] text-[14px] font-semibold absolute bottom-[17px] border-2 border-black rounded-md bg-white text-black font-bold py-[3.5px]"
             >
               Hủy bỏ
             </button>

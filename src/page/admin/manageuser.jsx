@@ -94,7 +94,7 @@ export default function ManageUser() {
       </div>
       <div className="flex">
         {/* sidebar  */}
-        <div className="w-[20%]">
+        <div className="w-[20%] h-[90%]">
           <SideBar />
         </div>
         {/* table manage  */}

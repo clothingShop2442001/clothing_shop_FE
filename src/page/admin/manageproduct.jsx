@@ -144,7 +144,7 @@ export default function ManageProduct() {
         <HeaderAdmin />
       </div>
       <div className="flex">
-        <div className="w-[20%]">
+        <div className="w-[20%]  h-[90%]">
           <SideBar />
         </div>
         <div className="w-[80%]">

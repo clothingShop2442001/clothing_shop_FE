@@ -84,11 +84,11 @@ export default function ManageOder() {
       </div>
       <div className="flex">
         {/* sidebar  */}
-        <div className="w-[20%]">
+        <div className="w-[20%] h-[90%]">
           <SideBar />
         </div>
         {/* table manage  */}
-        <div className="w-[80%]">
+        <div className="w-[80%]  h-[90%]">
           <div className="w-[95%] mt-3 mx-auto">
             <h1 className="font-semibold ">Danh sách đơn hàng</h1>
             <hr className="mt-2 border-[1px] border-gray" />

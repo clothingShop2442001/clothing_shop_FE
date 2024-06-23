@@ -28,6 +28,7 @@ const suffix = (
 
 function Login() {
   const navigate = useNavigate();
+  const [registerForm] = Form.useForm();
 
   // useEffect(() => {
   //   const user = localStorage.getItem("user");
@@ -58,7 +59,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(userData));
 
         if (role === "Admin") {
-          navigate("/account");
+          navigate("/manageuser");
         } else if (role === "User") {
           navigate("/account");
         }
@@ -146,6 +147,7 @@ function Login() {
 
         {/* register  */}
         <Form
+          form={registerForm}
           className="text-center"
           name="basic"
           initialValues={{
