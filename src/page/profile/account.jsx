@@ -21,43 +21,13 @@ const columns = [
 
   {
     title: "Địa chỉ giao hàng",
-    dataIndex: "addres",
+    dataIndex: "address",
     key: "OrderDate",
   },
   {
     title: "Tổng giá trị",
     dataIndex: "totalPrice",
     key: "totalPrice",
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    order: "#45162",
-    date: "24/4/2003",
-    address: "Đà Nẵng, Vietnam",
-    price: "615.000₫",
-    orderStatus: "Chưa thanh toán",
-    Detail: "Xem chi tiết",
-  },
-  {
-    key: "2",
-    order: "#45162",
-    date: "24/4/2003",
-    address: "Đà Nẵng, Vietnam",
-    price: "615.000₫",
-    orderStatus: "Chưa thanh toán",
-    Detail: "Xem chi tiết",
-  },
-  {
-    key: "3",
-    order: "#45162",
-    date: "24/4/2003",
-    address: "Đà Nẵng, Vietnam",
-    price: "615.000₫",
-    orderStatus: "Chưa thanh toán",
-    Detail: "Xem chi tiết",
   },
 ];
 
@@ -163,7 +133,7 @@ export default function Account() {
             <span className="font-bold text-black">{userInfo.fullName}</span>
           </p>
           <p className="text-gray-500 font-semibold mt-1 text-[14px]">
-            Địa chỉ: <span>{userInfo.addres}</span>
+            Địa chỉ: <span>{userInfo.address}</span>
           </p>
           <p className="text-gray-500 font-semibold mt-1 text-[14px]">
             Email: <span>{userInfo.email}</span>

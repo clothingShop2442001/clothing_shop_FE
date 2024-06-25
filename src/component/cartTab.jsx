@@ -14,10 +14,8 @@ const CartTab = () => {
   const handleCloseTabCart = () => {
     dispatch(toggleStatusTab());
   };
-  const userId = localStorage.getItem("userId");
-  const userName = localStorage.getItem("fullName");
-  const phoneNumber = localStorage.getItem("phoneNumber");
-  // const address = localStorage.getItem("address");
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const handleOrder = () => {
     const payload = {
       totalPrice: carts.reduce((accumulator, currentValue) => {
@@ -25,10 +23,10 @@ const CartTab = () => {
           accumulator + parseInt(currentValue.price) * currentValue.quantity
         );
       }, 0),
-      userId: userId,
-      userName: userName,
-      phoneNumber: phoneNumber,
-      // addres: "1212212121",
+      userId: user.userId,
+      userName: user.fullName,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
     };
 
     axios

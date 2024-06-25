@@ -21,7 +21,7 @@ export default function ManageOder() {
 
     {
       title: "Địa chỉ giao hàng",
-      dataIndex: "addres",
+      dataIndex: "address",
       key: "OrderDate",
     },
     {
